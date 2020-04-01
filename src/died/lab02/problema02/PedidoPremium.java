@@ -25,8 +25,11 @@ public class PedidoPremium extends Pedido {
 
 	@Override
 	public boolean agregarProducto(Producto producto) {
-		productos.add(producto);
-		return true;		
+		if(productos.size()<=20) {
+			productos.add(producto);
+			return true;
+		}
+		return false;		
 	}
 
 	@Override
