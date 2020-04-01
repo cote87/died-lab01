@@ -28,16 +28,8 @@ public class Camino {
 	
 	public void agregar(int mtsLt,int mtsLn) {
 		int size = coordenadas.size();
-		if(size > 0) {
-			double lat,lng;
-			double rTierra = 6378.137;
-			double pi = Math.PI;
-			double latitud = coordenadas.get(size-1).getLatitud();
-			double m = (1d / ((2d * pi / 360d) * rTierra)) / 1000d;  //1 meter in degree
-			lat =  latitud + (mtsLt * m);
-			lng = (mtsLn * m) / Math.cos(latitud * (pi / 180));
-			agregar(lat,lng);	
-		}
+		if(size > 0)
+			agregar(moverPosicion(coordenadas.get(size-1),mtsLt,mtsLn));	
 	}
 	
 	public List<Coordenada> buscar(Coordenada no,Coordenada se){
@@ -48,6 +40,29 @@ public class Camino {
 				nuevasCoordenadas.add(coordenada);
 		}
 		return nuevasCoordenadas;
+	}
+	
+	public List<Coordenada> buscar(Coordenada coordenada,int distancia){
+		Coordenada no = this.moverPosicion(coordenada,distancia,-distancia);
+		Coordenada se = this.moverPosicion(coordenada,-distancia,distancia);	
+		return this.buscar(no, se);
+	}
+	
+	public ArrayList<Coordenada> getCoordenadas() {
+		return coordenadas;
+	}
+
+	private Coordenada moverPosicion(Coordenada coordenada,int mtsLt , int mtsLn) {
+		Coordenada nuevaCoordenada;
+		double lat,lng;
+		double rTierra = 6378.137;
+		double pi = Math.PI;
+		double latitud = coordenada.getLatitud();
+		double m = (1d / ((2d * pi / 360d) * rTierra)) / 1000d;  //1 meter in degree
+		lat =  latitud + (mtsLt * m);
+		lng = (mtsLn * m) / Math.cos(latitud * (pi / 180));
+		nuevaCoordenada = new Coordenada(lat,lng);
+		return nuevaCoordenada;
 	}
 	
 	private boolean between(double pos , double desde, double hasta) {
