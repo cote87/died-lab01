@@ -5,27 +5,30 @@ package died.lab02.problema02;
 
 import java.util.ArrayList;
 
+import died.lab02.problema03.Comisionable;
+
 /**
  * @author Cote
  *
  */
 public class Cadete {
 	
-	private ArrayList<Pedido> pedidos;
+	private ArrayList<Comisionable> comisionables;
 	
 	public Cadete() {
-		pedidos = new ArrayList<Pedido>();
+		comisionables = new ArrayList<Comisionable>();
 	}
 
-	public void agregarPedido(Pedido pedido) {
-		pedidos.add(pedido);
+	public void agregarPedido(Comisionable comisionable) {
+		comisionables.add(comisionable);
 	}
 	
 	public float comisiones() {
 		float comisionTotal=0f;
-		for(Pedido pedido:pedidos) {
-			if(pedido.getFechaDeEntrega() != null)
-				comisionTotal = comisionTotal + pedido.comision();
+		for(Comisionable comisionable:comisionables) {
+			if(comisionable.getFechaDeEntrega() != null) {
+				comisionTotal = comisionTotal + comisionable.comision();
+			}	
 		}
 		return comisionTotal;
 	}

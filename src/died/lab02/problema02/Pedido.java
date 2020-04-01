@@ -6,11 +6,13 @@ package died.lab02.problema02;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import died.lab02.problema03.Comisionable;
+
 /**
  * @author Cote
  *
  */
-public abstract class Pedido {
+public abstract class Pedido implements Comisionable{
 	
 	protected ArrayList<Producto> productos;
 	protected LocalDate fechaDeEntrega;
